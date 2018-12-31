@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {Room} from '../_models/room';
+import {Observable} from 'rxjs';
+import {Type} from '../_models/type.enum';
 
 @Component({
   selector: 'app-floor',
@@ -7,9 +10,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FloorComponent implements OnInit {
 
-  constructor() { }
+  floorLevel: number;
+  rooms: Room[] = [
+    {naam: 'lokaal 404', drukte: 100, bezet: true, hoogte: 100, breedte: 100, type: Type.klaslokaal, floor: 4},
+    {naam: 'lokaal 100', drukte: 8, bezet: true, hoogte: 100, breedte: 200, type: Type.vergaderzaal, floor: 1}
+  ];
 
-  ngOnInit() {
+  constructor() {
   }
 
+  ngOnInit() {
+    // mongodb --> floor_collectie.find({floorLevel: floorLevel}) returns Floor{Room[]}
+    this.fetchRooms().subscribe(() => {
+      return '';
+    });
+  }
+
+  private fetchRooms(): Observable<Room[]> {
+    return;
+  }
 }

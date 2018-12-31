@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {Floor} from './main/_models/floor';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -8,5 +9,15 @@ import {Floor} from './main/_models/floor';
 })
 export class AppComponent {
   title = 'campusproject';
-  floors: Floor[];
+  floors: Floor[] = [
+    {floorLevel: 1, rooms: []},
+    {floorLevel: 2, rooms: []},
+    {floorLevel: 3, rooms: []}
+  ];
+
+
+  fetchFloors(): Observable<Floor[]> {
+    return;
+  }
+
 }

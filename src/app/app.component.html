@@ -1,11 +1,11 @@
-<!--The content below is only a placeholder and can be replaced.-->
-
+<!--navbar-->
 <mat-toolbar color="primary">
   <mat-toolbar-row>
     <span>Campus</span>
-
-    <button mat-button *ngFor="let floor of floors">{{floor.floorLevel}}</button>
-
+    <button mat-button
+            *ngFor="let floor of floors"
+            routerLink="/floor/{{floor.floorLevel}}">
+      Verdieping {{floor.floorLevel}}</button>
   </mat-toolbar-row>
 </mat-toolbar>
 
