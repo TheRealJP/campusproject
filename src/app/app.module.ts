@@ -18,13 +18,17 @@ import { LoginComponent } from './security/login/login.component';
 import { FloorComponent } from './main/floor/floor.component';
 import { RoomComponent } from './main/room/room.component';
 import {RouterModule} from '@angular/router';
+import {ReactiveFormsModule} from '@angular/forms';
+import { FloorcontainerComponent } from './main/floorcontainer/floorcontainer.component';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     FloorComponent,
-    RoomComponent
+    RoomComponent,
+    FloorcontainerComponent
   ],
   imports: [
     BrowserModule,
@@ -40,6 +44,8 @@ import {RouterModule} from '@angular/router';
     MatCheckboxModule,
     MatSidenavModule,
     MatTabsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
     RouterModule.forRoot(appRoutes, {enableTracing: false}),
   ],
   providers: [],

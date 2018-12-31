@@ -1,7 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Room} from '../_models/room';
 import {Observable} from 'rxjs';
 import {Type} from '../_models/type.enum';
+import {Floor} from '../_models/floor';
 
 @Component({
   selector: 'app-floor',
@@ -10,7 +11,9 @@ import {Type} from '../_models/type.enum';
 })
 export class FloorComponent implements OnInit {
 
+  @Input() floor: Floor = {floorLevel: 0, rooms: []};
   floorLevel: number;
+
   rooms: Room[] = [
     {naam: 'lokaal 404', drukte: 100, bezet: true, hoogte: 100, breedte: 100, type: Type.klaslokaal, floor: 4},
     {naam: 'lokaal 100', drukte: 8, bezet: true, hoogte: 100, breedte: 200, type: Type.vergaderzaal, floor: 1}

@@ -1,13 +1,20 @@
 <!--navbar-->
 <mat-toolbar color="primary">
   <mat-toolbar-row>
-    <span>Campus</span>
-    <button mat-button
-            *ngFor="let floor of floors"
-            routerLink="/floor/{{floor.floorLevel}}">
-      Verdieping {{floor.floorLevel}}</button>
+    <span>{{title}}</span>
+
+    <!--floor.key fetches key from [object]-->
+    <button mat-button *ngFor="let floor of floors | keyvalue"
+            routerLink="/floor/{{floor.key}}">
+      Verdieping {{floor.key}}
+    </button>
+
+
   </mat-toolbar-row>
 </mat-toolbar>
 
-
 <router-outlet></router-outlet>
+
+<!--
+  click stuurt index door naar floorcontainer die de juiste floor ophaalt via floorservice
+-->
