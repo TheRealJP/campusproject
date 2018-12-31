@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {Floor} from './main/_models/floor';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,5 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'campusproject';
+  floors: Floor[];
 }
