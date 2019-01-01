@@ -5,7 +5,7 @@ import {AuthenticationService} from './security/_services/authentication.service
 import {Role} from './security/_models/role.enum';
 import {FloorService} from './main/_services/floor.service';
 import {Floor} from './main/_models/floor';
-import {map} from 'rxjs/operators';
+import {KeyValue} from '@angular/common';
 
 @Component({
   selector: 'app-root',
@@ -25,14 +25,7 @@ export class AppComponent {
     }, error => console.log(error));
 
     floorService.fetchFloors().subscribe((f) => this.floors = f);
-    floorService.fetchFloors().pipe(map((f) => {
-        this.floors = f;
-        return f;
-      }
-    ),)
-    ;
   }
-
 
   get isPersoneel() {
     return this.currentUser && this.currentUser.role === Role.Personeel;
@@ -42,5 +35,9 @@ export class AppComponent {
     this.currentUser = null;
     this.authService.logout();
     this.router.navigate(['/login']);
+  }
+
+  switchFloors(floor: KeyValue<number, Floor>) {
+    this.router.navigate([`/floors/${floor.key}`]);
   }
 }

@@ -1,1 +1,5 @@
-<app-floor></app-floor>
+<div id="container">
+  <app-floor *ngIf="floor" [floor]="floor"></app-floor>
+
+  <b *ngIf="error">(floorcontainer-component) ERROR: {{error}}</b>
+</div>

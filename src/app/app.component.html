@@ -1,20 +1,15 @@
 <!--navbar-->
 <mat-toolbar color="primary">
   <mat-toolbar-row>
-    <span>{{title}}</span>
+    <!--home button-->
+    <button mat-button routerLink="/home">{{title}}</button>
 
     <!--floor.key fetches key from [object]-->
     <button mat-button *ngFor="let floor of floors | keyvalue"
-            routerLink="/floor/{{floor.key}}">
-      Verdieping {{floor.key}}
-    </button>
-
-
+            routerLink="/floor/{{floor.key}}"
+            (click)="switchFloors(floor)">Verdieping {{floor.key}}</button>
   </mat-toolbar-row>
 </mat-toolbar>
 
+<!--content-->
 <router-outlet></router-outlet>
-
-<!--
-  click stuurt index door naar floorcontainer die de juiste floor ophaalt via floorservice
--->

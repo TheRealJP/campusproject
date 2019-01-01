@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {Floor} from '../_models/floor';
 import {FloorService} from '../_services/floor.service';
+import {ActivatedRoute, ParamMap} from '@angular/router';
+import {switchMap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-floorcontainer',
@@ -8,22 +10,19 @@ import {FloorService} from '../_services/floor.service';
   styleUrls: ['./floorcontainer.component.scss']
 })
 export class FloorcontainerComponent implements OnInit {
+  floor: Floor = {floorLevel: 0, rooms: []};
+  private error = '';
 
-  floors: Floor[] = [
-    {floorLevel: 1, rooms: []},
-    {floorLevel: 2, rooms: []},
-    {floorLevel: 3, rooms: []}
-  ];
-
-  constructor(private floorService: FloorService) {
-    floorService.fetchFloors().subscribe((f) => {
-      console.log(f);
-      this.floors = f;
-    });
+  constructor(private floorService: FloorService, private route: ActivatedRoute) {
+    this.route.paramMap
+      .pipe(switchMap((params: ParamMap) => this.floorService.fetchFloor(+params.get('id'))))
+      .subscribe((floor: Floor) => {
+          this.floor.floorLevel = floor[0].floorlevel;
+          this.floor.rooms = floor[0].rooms;
+        }, error => this.error = error
+      );
   }
 
-  ngOnInit() {
-
+  ngOnInit(): void {
   }
-
 }

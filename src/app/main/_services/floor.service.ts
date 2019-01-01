@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {Floor} from '../_models/floor';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {tap} from 'rxjs/operators';
 import {log} from 'util';
 
@@ -9,18 +9,11 @@ import {log} from 'util';
   providedIn: 'root'
 })
 export class FloorService {
-  // fetchedFloors: Floor[] = [];
   baseUrl = 'http://localhost:3000/api';
-
-  // private headers = new HttpHeaders().set('Content-Type', 'application/json');
-
+  private headers = new HttpHeaders().set('Content-Type', 'application/json');
 
   constructor(private http: HttpClient) {
-    // this.fetchFloors().subscribe(f => {
-    //   this.fetchedFloors = f;
-    // });
   }
-
 
   fetchFloors(): Observable<Floor[]> {
     return this.http.get<Floor[]>(`${this.baseUrl}/floors`).pipe(
@@ -29,8 +22,16 @@ export class FloorService {
   }
 
   fetchFloor(id: number): Observable<Floor> {
-    return this.http.get<Floor>(`${this.baseUrl}/floors/${id}`).pipe(
+    return this.http.get<Floor>(`${this.baseUrl}/floors/${id}`, {headers: this.headers}).pipe(
+      tap(() => console.log('(floor-service): fetched floor ' + id))
+    );
+  }
+
+
+  fetchRoomsByFloor(id: number): Observable<Floor> {
+    return this.http.get<Floor>(`${this.baseUrl}/floors/${id}/rooms`).pipe(
       tap(() => log('fetched floor' + id))
     );
   }
+
 }

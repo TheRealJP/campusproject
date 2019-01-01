@@ -21,6 +21,8 @@ import {RouterModule} from '@angular/router';
 import {ReactiveFormsModule} from '@angular/forms';
 import { FloorcontainerComponent } from './main/floorcontainer/floorcontainer.component';
 import {HttpClientModule} from '@angular/common/http';
+import {CommonModule} from '@angular/common';
+import { HomeComponent } from './main/home/home.component';
 
 @NgModule({
   declarations: [
@@ -28,9 +30,11 @@ import {HttpClientModule} from '@angular/common/http';
     LoginComponent,
     FloorComponent,
     RoomComponent,
-    FloorcontainerComponent
+    FloorcontainerComponent,
+    HomeComponent
   ],
   imports: [
+    CommonModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,

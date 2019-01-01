@@ -1,3 +1,4 @@
-<app-room *ngFor="let room for rooms">
-  {{room}}
-</app-room>
+<h2 mat-card-title>Verdieping {{floor.floorLevel}}</h2>
+
+<app-room *ngFor="let r of floor.rooms"
+  [naam]="r.naam"></app-room>
