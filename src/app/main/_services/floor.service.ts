@@ -2,8 +2,9 @@ import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {Floor} from '../_models/floor';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {tap} from 'rxjs/operators';
+import {catchError, tap} from 'rxjs/operators';
 import {log} from 'util';
+import {error} from '@angular/compiler/src/util';
 
 @Injectable({
   providedIn: 'root'

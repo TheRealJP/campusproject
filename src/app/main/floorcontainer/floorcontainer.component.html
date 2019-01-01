@@ -1,5 +1,11 @@
 <div id="container">
-  <app-floor *ngIf="floor" [floor]="floor"></app-floor>
+  <app-floor [floor]="floor"
+             [floorLevel]="floor.floorLevel"
+             [rooms]="floor.rooms"> </app-floor>
 
   <b *ngIf="error">(floorcontainer-component) ERROR: {{error}}</b>
+  <b *ngIf="!floor">NO FLOOR FOUND</b>
 </div>
+
+
+<!--floorcontainer -->

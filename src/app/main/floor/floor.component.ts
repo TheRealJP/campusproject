@@ -1,8 +1,9 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Room} from '../_models/room';
-import {Observable} from 'rxjs';
-import {Type} from '../_models/type.enum';
 import {Floor} from '../_models/floor';
+import {FloorService} from '../_services/floor.service';
+import {ActivatedRoute} from '@angular/router';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-floor',
@@ -11,19 +12,19 @@ import {Floor} from '../_models/floor';
 })
 export class FloorComponent implements OnInit {
 
-  @Input() floor: Floor = {floorLevel: 0, rooms: []};
-  floorLevel: number;
+  @Input() floor: Floor;
+  @Input() rooms: Room[];
+  @Input() floorLevel: number;
 
-  rooms: Room[] = [
-    {naam: 'lokaal 404', drukte: 100, bezet: true, hoogte: 100, breedte: 100, type: Type.klaslokaal},
-    {naam: 'lokaal 100', drukte: 8, bezet: true, hoogte: 100, breedte: 200, type: Type.vergaderzaal}
-  ];
-
-  constructor() {
+  constructor(private floorService: FloorService, private route: ActivatedRoute) {
   }
 
   ngOnInit() {
-    // mongodb --> floor_collectie.find({floorLevel: floorLevel}) returns floor{Room[]}
+    this.floorService.fetchFloor(this.floorLevel).subscribe((floor) => {
+      this.rooms = _.get(floor[0], 'rooms');
+      console.log('after applying' + this.rooms[0]['name']);
+    });
+
   }
 
 }

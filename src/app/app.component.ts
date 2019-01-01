@@ -38,6 +38,7 @@ export class AppComponent {
   }
 
   switchFloors(floor: KeyValue<number, Floor>) {
+
     this.router.navigate([`/floors/${floor.key}`]);
   }
 }

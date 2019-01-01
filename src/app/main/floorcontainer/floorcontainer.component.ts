@@ -3,6 +3,7 @@ import {Floor} from '../_models/floor';
 import {FloorService} from '../_services/floor.service';
 import {ActivatedRoute, ParamMap} from '@angular/router';
 import {switchMap} from 'rxjs/operators';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-floorcontainer',
@@ -10,13 +11,17 @@ import {switchMap} from 'rxjs/operators';
   styleUrls: ['./floorcontainer.component.scss']
 })
 export class FloorcontainerComponent implements OnInit {
-  floor: Floor = {floorLevel: 0, rooms: []};
+  floor: Floor = {floorLevel: 0, rooms: [{naam: 'test'}]};
   private error = '';
 
   constructor(private floorService: FloorService, private route: ActivatedRoute) {
     this.route.paramMap
       .pipe(switchMap((params: ParamMap) => this.floorService.fetchFloor(+params.get('id'))))
       .subscribe((floor: Floor) => {
+
+          console.log(floor[0].rooms);
+          console.log(_.get(floor[0], 'floorlevel'));
+
           this.floor.floorLevel = floor[0].floorlevel;
           this.floor.rooms = floor[0].rooms;
         }, error => this.error = error
@@ -24,5 +29,6 @@ export class FloorcontainerComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  
   }
 }
