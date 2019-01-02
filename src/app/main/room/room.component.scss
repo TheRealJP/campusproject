@@ -15,10 +15,15 @@ mat-button-toggle-group{
 }
 
 #roomContainer{
+  border: lightslategray 2px solid;
   padding: 45px;
-  top: 10px;
-  background: white;
+  margin: 1rem;
+
+  #bookingModule{
+    display: inline-block;
+  }
 }
+
 
 
 

@@ -13,7 +13,7 @@
 
 
   <!--edit-->
-  <span>
+  <span style="float: right;">
     <button mat-icon-button>
       <mat-icon>edit</mat-icon>
     </button>
@@ -24,19 +24,20 @@
   </span>
 
   <div id="extraUI" *ngIf="isThisRoomSelected">
-
     <!--slider module-->
     <span *ngIf="hasSlider()">
+      <span>Drukte: </span>
       <mat-slider [step]="1"
                   [min]="0"
                   [max]="room['capaciteit']"
                   [(ngModel)]="room['drukte']"
-                  (change)="getColor()">
+                  (change)="getColor(room['drukte'],room['capaciteit'])">
       </mat-slider>
+      <span>{{room['drukte']}}</span>
     </span>
 
     <!--booking module-->
-    <span *ngIf="isBookable()">
+    <span id="bookingModule" *ngIf="isBookable()">
       <mat-button-toggle-group #group="matButtonToggleGroup"
                                [disabled]="room['bezet']"
                                [value]="'1'"
@@ -45,12 +46,11 @@
         <mat-button-toggle value="2">2</mat-button-toggle>
         <mat-button-toggle value="3">3</mat-button-toggle>
       </mat-button-toggle-group>
-     <span>
 
-       <button (click)="bookRoom()"
-               [disabled]="room['bezet']"
-               mat-raised-button>Reserveer voor {{amountOfHoursBooked}} uur</button>
-     </span>
+      <button (click)="bookRoom()"
+              [disabled]="room['bezet']"
+              mat-raised-button>
+        Reserveer voor {{amountOfHoursBooked}} uur</button>
     </span>
   </div>
 
