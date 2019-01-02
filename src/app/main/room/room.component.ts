@@ -16,7 +16,8 @@ export class RoomComponent implements OnInit {
   isThisRoomSelected: boolean;
   amountOfHoursBooked: number;
   roomColor = 'rgb(255,255,255)';
-  private timerSubscription: Subscription;
+  private reservationSubscription: Subscription;
+  private unselectSubscription: Subscription;
 
   constructor() {
   }
@@ -26,13 +27,20 @@ export class RoomComponent implements OnInit {
     this.amountOfHoursBooked = 1;
   }
 
-  // todo: deselect room at given time
-  //  deselect room when selecting another
+  //  todo:deselect room when selecting another
   selectRoom() {
+
     if (this.room['naam'] !== this.selectedRoom) {
       this.isThisRoomSelected = false;
-      return;
     }
+
+    this.unselectSubscription = timer(0, 1000).subscribe(t => {
+      console.log(t);
+      if (t >= 10) {
+        this.isThisRoomSelected = false;
+        this.unselectSubscription.unsubscribe();
+      }
+    });
 
     this.isThisRoomSelected = !this.isThisRoomSelected;
     console.log('selected room:' + this.room['name']);
@@ -56,9 +64,10 @@ export class RoomComponent implements OnInit {
     console.log('trying to book this many hours:' + this.amountOfHoursBooked);
   }
 
+  // locks reservation ui and updates background color based on timer subscription values
   bookRoom() {
     this.room['bezet'] = true;
-    this.bookingTimer();    // updates background color based on timer subscription values
+    this.bookingTimer();
   }
 
   // updates roomColor
@@ -84,6 +93,7 @@ export class RoomComponent implements OnInit {
     }
   }
 
+  // change periodOrScheduler to make it go faster, default should be 1000 == 1s
   private bookingTimer() {
     const maxHours = this.amountOfHoursBooked * 3600;
     console.log('maxhours:' + maxHours);
@@ -91,13 +101,12 @@ export class RoomComponent implements OnInit {
     timeObject = new Date(timeObject.getTime() + maxHours * 10);
     console.log('next reservation can be made in:' + timeObject);
 
-    // change periodOrScheduler to make it go faster, default should be 1000 == 1s
-    this.timerSubscription = timer(0, 10).subscribe(t => {
+    this.reservationSubscription = timer(0, 1000).subscribe(t => {
       this.getColor(t, maxHours);
       if (t >= maxHours) {
         console.log('maxhours reached:' + maxHours);
         this.room['bezet'] = false;
-        this.timerSubscription.unsubscribe();
+        this.reservationSubscription.unsubscribe();
       }
     });
   }
