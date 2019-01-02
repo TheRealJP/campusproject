@@ -59,11 +59,26 @@ export class RoomComponent implements OnInit {
     console.log('selected room:' + this.room['name']);
   }
 
+
   getColor() {
-    // 1 is reddish
-    // 120 is green
-    // switch between time of booking OR slider value
-    const hue = ((1 - this.room['drukte']) * 120).toString(10);
-    this.roomColor = ['hsl(', hue, ',100%,50%)'].join('');
+    const percentage = (((this.room['drukte'] - 1) * (100 - 1)) / (this.room['capaciteit'] - 1)) + 1;
+    console.log('roomColor before:' + this.roomColor);
+    console.log('' + percentage);
+    const r = percentage < 50 ? 255 : Math.floor(255 - (percentage * 2 - 100) * 255 / 100);
+    const g = percentage > 50 ? 255 : Math.floor((percentage * 2) * 255 / 100);
+    this.roomColor = 'rgb(' + r + ',' + g + ',0)';
+    console.log('roomColor after:' + this.roomColor);
+
   }
+
+  // getColor() {
+  //   // 1 is reddish
+  //   // 120 is green
+  //   // switch between time of booking OR slider value
+  //
+  //
+  //   const hue = ((1 - percentage * 120).toString(10));
+  //   this.roomColor = ['hsl(', hue, ',100%,50%)'].join('');
+  //
+  // }
 }

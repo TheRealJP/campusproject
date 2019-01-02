@@ -1,5 +1,4 @@
-<div id="roomContainer" [ngStyle]="{'': getColor()}">
-
+<div id="roomContainer" [ngStyle]="{'backgroundColor': roomColor}">
 
   <!--default info-->
   <span class="roomInfo">{{room['name']}}</span>
@@ -11,11 +10,6 @@
   <span class="roomInfo" *ngIf="room['capaciteit']">
     <mat-icon matBadge="{{room['capaciteit']}}" matBadgeSize="medium" matBadgePosition="above after">person</mat-icon>
   </span>
-
-  <span class="roomInfo" *ngIf="room['bezet'] && isBookable()" ngDefaultControl
-        [(ngModel)]="timerValue">{{timerValue}}</span>
-
-  <span class="roomInfo" *ngIf="room['drukte'] && hasSlider()"><span>drukte</span></span>
 
 
   <!--edit-->
@@ -33,16 +27,12 @@
 
     <!--slider module-->
     <span *ngIf="hasSlider()">
-      <span class="">Drukte: </span>
       <mat-slider [step]="1"
                   [min]="0"
                   [max]="room['capaciteit']"
                   [(ngModel)]="room['drukte']"
                   (change)="getColor()">
-                  <!--(change)="hsl_col_perc(room['drukte'],0,room['capaciteit'])">-->
-
       </mat-slider>
-      <span class="">{{room['drukte']}}</span>
     </span>
 
     <!--booking module-->
