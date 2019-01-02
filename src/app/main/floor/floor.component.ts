@@ -10,7 +10,7 @@ import {FloorService} from '../_services/floor.service';
 export class FloorComponent implements OnInit {
   @Input() rooms: Room[];
   @Input() floorLevel: number;
-  private selectedRoom: Room;
+  private selectedRoom: string;
   private error: '';
 
   constructor(private floorService: FloorService) {
@@ -20,12 +20,7 @@ export class FloorComponent implements OnInit {
 
   }
 
-  selectRoom(r: Room) {
-    if (r === this.selectedRoom) {
-      return;
-    }
-
-    this.selectedRoom = r;
-    console.log('selected room:' + r['name']);
+  selectRoom(rname: string) {
+    this.selectedRoom = rname;
   }
 }

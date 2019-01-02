@@ -1,3 +1,15 @@
-#container{
+#container {;
   border: 6px cornflowerblue solid;
+
+  #iconVisibility {
+    span {
+      mat-button-toggle {
+        margin-right: 0.5rem;
+      }
+    }
+  }
+}
+
+#floor {
+  border: 6px palevioletred solid;
 }

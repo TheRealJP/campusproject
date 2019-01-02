@@ -1,33 +1,70 @@
-<div style="border:black solid 1px">
-  <div class="roomContainer">
-    <span class="roomInfo">{{room['name']}}</span>
-    <span class="roomInfo"> {{room['capaciteit']}}</span>
-    <mat-icon>{{room['type']}}</mat-icon>
+<div id="roomContainer" [ngStyle]="{'': getColor()}">
 
-    <span *ngIf="room['beamer']">
-      <mat-icon>camera</mat-icon>
-    </span>
 
+  <!--default info-->
+  <span class="roomInfo">{{room['name']}}</span>
+  <mat-icon>{{room['type']}}</mat-icon>
+
+  <!--non default-->
+  <span class="roomInfo" *ngIf="room['beamer']"><mat-icon>camera</mat-icon></span>
+
+  <span class="roomInfo" *ngIf="room['capaciteit']">
+    <mat-icon matBadge="{{room['capaciteit']}}" matBadgeSize="medium" matBadgePosition="above after">person</mat-icon>
+  </span>
+
+  <span class="roomInfo" *ngIf="room['bezet'] && isBookable()" ngDefaultControl
+        [(ngModel)]="timerValue">{{timerValue}}</span>
+
+  <span class="roomInfo" *ngIf="room['drukte'] && hasSlider()"><span>drukte</span></span>
+
+
+  <!--edit-->
+  <span>
+    <button mat-icon-button>
+      <mat-icon>edit</mat-icon>
+    </button>
+
+    <button (click)="selectRoom()" mat-icon-button>
+      <mat-icon>keyboard_arrow_down</mat-icon>
+    </button>
+  </span>
+
+  <div id="extraUI" *ngIf="isThisRoomSelected">
+
+    <!--slider module-->
     <span *ngIf="hasSlider()">
-      <mat-slider min="0" max="1000"></mat-slider>
+      <span class="">Drukte: </span>
+      <mat-slider [step]="1"
+                  [min]="0"
+                  [max]="room['capaciteit']"
+                  [(ngModel)]="room['drukte']"
+                  (change)="getColor()">
+                  <!--(change)="hsl_col_perc(room['drukte'],0,room['capaciteit'])">-->
+
+      </mat-slider>
+      <span class="">{{room['drukte']}}</span>
     </span>
 
+    <!--booking module-->
     <span *ngIf="isBookable()">
-      <mat-button-toggle-group #group="matButtonToggleGroup" (change)="onBookingChange(group.value)">
-        <mat-button-toggle value="1">
-          1
-        </mat-button-toggle>
-        <mat-button-toggle value="2">
-          2
-        </mat-button-toggle>
-        <mat-button-toggle value="3">
-          3
-        </mat-button-toggle>
+      <mat-button-toggle-group #group="matButtonToggleGroup"
+                               [disabled]="room['bezet']"
+                               [value]="'1'"
+                               (change)="onBookingChange(group.value)">
+        <mat-button-toggle value="1">1</mat-button-toggle>
+        <mat-button-toggle value="2">2</mat-button-toggle>
+        <mat-button-toggle value="3">3</mat-button-toggle>
       </mat-button-toggle-group>
-    </span>
+     <span>
 
+       <button (click)="bookRoom()"
+               [disabled]="room['bezet']"
+               mat-raised-button>Reserveer voor {{amountOfHoursBooked}} uur</button>
+     </span>
+    </span>
   </div>
-  <button mat-chip>
-    <mat-icon>edit</mat-icon>
-  </button>
+
+
+  <div *ngIf="isThisRoomSelected">this room has been selected</div>
 </div>
+

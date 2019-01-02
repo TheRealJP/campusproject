@@ -12,13 +12,13 @@ import {
   MatIconModule,
   MatListModule,
   MatMenuModule,
-  MatCheckboxModule, MatTabsModule, MatSliderModule, MatButtonToggleModule
+  MatCheckboxModule, MatTabsModule, MatSliderModule, MatButtonToggleModule, MatSlideToggleModule, MatCardModule, MatBadgeModule
 } from '@angular/material';
 import { LoginComponent } from './security/login/login.component';
 import { FloorComponent } from './main/floor/floor.component';
 import { RoomComponent } from './main/room/room.component';
 import {RouterModule} from '@angular/router';
-import {ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { FloorcontainerComponent } from './main/floorcontainer/floorcontainer.component';
 import {HttpClientModule} from '@angular/common/http';
 import {CommonModule} from '@angular/common';
@@ -34,6 +34,10 @@ import { HomeComponent } from './main/home/home.component';
     HomeComponent
   ],
   imports: [
+    FormsModule,
+    MatSlideToggleModule,
+    MatCardModule,
+    MatBadgeModule,
     MatButtonToggleModule,
     MatSliderModule,
     CommonModule,

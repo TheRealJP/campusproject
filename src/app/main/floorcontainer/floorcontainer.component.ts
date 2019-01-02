@@ -3,7 +3,6 @@ import {Floor} from '../_models/floor';
 import {FloorService} from '../_services/floor.service';
 import {ActivatedRoute, ParamMap} from '@angular/router';
 import {switchMap} from 'rxjs/operators';
-import * as _ from 'lodash';
 import {Type} from '../_models/type.enum';
 import {Room} from '../_models/room';
 
@@ -17,6 +16,7 @@ export class FloorcontainerComponent implements OnInit {
   floor: Floor = {floorLevel: 0, rooms: [{naam: 'test', type: Type.vergaderzaal, hoogte: 100, breedte: 100, drukte: 100, bezet: true}]};
   floorLevel: number;
   rooms: Room[];
+  inFloorMode = false;
 
   constructor(private floorService: FloorService, private route: ActivatedRoute) {
   }
@@ -32,5 +32,15 @@ export class FloorcontainerComponent implements OnInit {
 
         }, error => this.error = error
       );
+  }
+
+  onListFloorSwitch(value: any) {
+    this.inFloorMode = value;
+
+    if (value === 'false') {
+      console.log('switched to list mode');
+    } else {
+      console.log('switched to floor mode');
+    }
   }
 }
