@@ -17,7 +17,10 @@ export class AppComponent {
   currentUser: User;
   floors: Floor[] = [];
 
-  constructor(private router: Router, private authService: AuthenticationService, private floorService: FloorService) {
+  constructor(private router: Router,
+              private authService: AuthenticationService,
+              private floorService: FloorService) {
+
     this.authService.currentUser.subscribe((user) => {
       if (user) {
         this.currentUser = user[0]; // array format, so we have to filter it out like this
@@ -38,7 +41,6 @@ export class AppComponent {
   }
 
   switchFloors(floor: KeyValue<number, Floor>) {
-
     this.router.navigate([`/floors/${floor.key}`]);
   }
 }

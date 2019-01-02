@@ -1,3 +1,33 @@
 <div style="border:black solid 1px">
-  <div class="debug" >this is room: {{name}}</div>
+  <div class="roomContainer">
+    <span class="roomInfo">{{room['name']}}</span>
+    <span class="roomInfo"> {{room['capaciteit']}}</span>
+    <mat-icon>{{room['type']}}</mat-icon>
+
+    <span *ngIf="room['beamer']">
+      <mat-icon>camera</mat-icon>
+    </span>
+
+    <span *ngIf="hasSlider()">
+      <mat-slider min="0" max="1000"></mat-slider>
+    </span>
+
+    <span *ngIf="isBookable()">
+      <mat-button-toggle-group #group="matButtonToggleGroup" (change)="onBookingChange(group.value)">
+        <mat-button-toggle value="1">
+          1
+        </mat-button-toggle>
+        <mat-button-toggle value="2">
+          2
+        </mat-button-toggle>
+        <mat-button-toggle value="3">
+          3
+        </mat-button-toggle>
+      </mat-button-toggle-group>
+    </span>
+
+  </div>
+  <button mat-chip>
+    <mat-icon>edit</mat-icon>
+  </button>
 </div>

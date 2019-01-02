@@ -4,6 +4,8 @@ import {FloorService} from '../_services/floor.service';
 import {ActivatedRoute, ParamMap} from '@angular/router';
 import {switchMap} from 'rxjs/operators';
 import * as _ from 'lodash';
+import {Type} from '../_models/type.enum';
+import {Room} from '../_models/room';
 
 @Component({
   selector: 'app-floorcontainer',
@@ -11,24 +13,24 @@ import * as _ from 'lodash';
   styleUrls: ['./floorcontainer.component.scss']
 })
 export class FloorcontainerComponent implements OnInit {
-  floor: Floor = {floorLevel: 0, rooms: [{naam: 'test'}]};
-  private error = '';
+  error = '';
+  floor: Floor = {floorLevel: 0, rooms: [{naam: 'test', type: Type.vergaderzaal, hoogte: 100, breedte: 100, drukte: 100, bezet: true}]};
+  floorLevel: number;
+  rooms: Room[];
 
   constructor(private floorService: FloorService, private route: ActivatedRoute) {
-    this.route.paramMap
-      .pipe(switchMap((params: ParamMap) => this.floorService.fetchFloor(+params.get('id'))))
-      .subscribe((floor: Floor) => {
-
-          console.log(floor[0].rooms);
-          console.log(_.get(floor[0], 'floorlevel'));
-
-          this.floor.floorLevel = floor[0].floorlevel;
-          this.floor.rooms = floor[0].rooms;
-        }, error => this.error = error
-      );
   }
 
   ngOnInit(): void {
-  
+    this.route.paramMap
+      .pipe(switchMap((params: ParamMap) => this.floorService.fetchFloor(+params.get('id'))))
+      .subscribe((floor: Floor) => {
+          this.floorLevel = floor[0].floorlevel;
+          this.rooms = floor[0].rooms;
+          this.floor = floor[0];
+          console.log(this.floorLevel);
+
+        }, error => this.error = error
+      );
   }
 }

@@ -12,7 +12,7 @@ import {
   MatIconModule,
   MatListModule,
   MatMenuModule,
-  MatCheckboxModule, MatTabsModule
+  MatCheckboxModule, MatTabsModule, MatSliderModule, MatButtonToggleModule
 } from '@angular/material';
 import { LoginComponent } from './security/login/login.component';
 import { FloorComponent } from './main/floor/floor.component';
@@ -34,6 +34,8 @@ import { HomeComponent } from './main/home/home.component';
     HomeComponent
   ],
   imports: [
+    MatButtonToggleModule,
+    MatSliderModule,
     CommonModule,
     BrowserModule,
     AppRoutingModule,

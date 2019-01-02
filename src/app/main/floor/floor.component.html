@@ -1,7 +1,7 @@
 <div id="floor">
   <h2 mat-card-title>Verdieping {{floorLevel}}</h2>
-
-  <app-room *ngFor="let r of rooms"
-            [room]="r">
+  <app-room (click)="selectRoom(r)" *ngFor="let r of rooms"
+            [room]="r"
+            >
   </app-room>
 </div>
