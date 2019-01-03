@@ -1,7 +1,10 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnChanges, OnInit} from '@angular/core';
 import {FloorService} from '../_services/floor.service';
 import {ActivatedRoute} from '@angular/router';
 import {Room} from '../_models/room';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Observable} from 'rxjs';
+import {tap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-room-detail',
@@ -9,31 +12,49 @@ import {Room} from '../_models/room';
   styleUrls: ['./room-detail.component.scss']
 })
 export class RoomDetailComponent implements OnInit {
-
   room: Room;
+  updateRoomForm: FormGroup;
+  private submitted: boolean;
+  private roomObservable: Observable<Room>;
 
-  constructor(private floorService: FloorService, private activatedRoute: ActivatedRoute) {
+
+  constructor(private floorService: FloorService, private activatedRoute: ActivatedRoute, private formBuilder: FormBuilder) {
   }
 
   ngOnInit() {
     const id = this.activatedRoute.snapshot.paramMap.get('id');
-    console.log('roomid from url outside lambda:' + id);
-    this.floorService.fetchRoomById(id).subscribe(r => {
-      this.room = r;
-      console.log('fetched room:' + JSON.stringify(this.room));
+
+    this.updateRoomForm = this.formBuilder.group({
+      name: ['', [Validators.required, Validators.minLength(5)]],
+      capaciteit: ['', [Validators.required, Validators.max(500)]],
+      type: ['', [Validators.required]],
+      beamer: '',
+      drukte: '',
+      bezet: ''
     });
+
+    this.roomObservable = this.floorService.fetchRoomById(id).pipe(
+      tap(room => this.updateRoomForm.patchValue(room))
+    ).pipe(
+      tap(room => this.room = room)
+    );
   }
 
-  hasSlider(): boolean {
-    return this.floorService.hasSlider(this.room);
+  get f() {
+    return this.updateRoomForm.controls;
   }
-
-  isBookable(): boolean {
-    return this.floorService.isBookable(this.room);
-  }
-
 
   submitRoom() {
-    // this.floorService.updateRoom();
+    this.submitted = true;
+    if (this.updateRoomForm.invalid) {
+      return;
+    }
+
+    alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.updateRoomForm.value));
+
+    this.floorService.updateRoom(this.room);
   }
 }
+
+
+

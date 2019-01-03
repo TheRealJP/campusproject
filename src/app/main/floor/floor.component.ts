@@ -15,7 +15,7 @@ export class FloorComponent implements OnInit {
   private selectedRoom: string;
   private error: '';
 
-  constructor(private floorService: FloorService) {
+  constructor() {
   }
 
   ngOnInit() {

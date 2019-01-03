@@ -1,14 +1,13 @@
 <div id="roomContainer" [ngStyle]="{'backgroundColor': roomColor}">
-
   <!--default info-->
   <span class="roomInfo" *ngIf="iconStatus['naam']">{{room['name']}}</span>
   <span class="roomInfo" *ngIf="iconStatus['type']"><mat-icon>{{room['type']}}</mat-icon></span>
-
   <!--non default-->
   <span class="roomInfo" *ngIf="room['beamer'] && iconStatus['beamer']"><mat-icon>camera</mat-icon></span>
-
   <span class="roomInfo" *ngIf="room['capaciteit'] && iconStatus['capaciteit']">
-    <mat-icon matBadge="{{room['capaciteit']}}" matBadgeSize="medium" matBadgePosition="above after">person</mat-icon>
+    <mat-icon matBadge="{{room['capaciteit']}}" matBadgeSize="medium" matBadgePosition="above after">
+      person
+    </mat-icon>
   </span>
 
 

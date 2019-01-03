@@ -1,12 +1,12 @@
-<div class="example-container">
-
+<form *ngIf="roomObservable | async" [formGroup]="updateRoomForm" (ngSubmit)="f.name.valid && submitRoom()" class="example-container">
   <!--validation fields-->
   <mat-form-field>
-    <input matInput placeholder="Naam">
+    <input matInput formControlName="name" placeholder="Naam" [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
   </mat-form-field>
 
+  <!--style-->
   <mat-form-field>
-    <mat-select [(ngModel)]="room['type']" placeholder="Type ruimte">
+    <mat-select formControlName="type" placeholder="Type ruimte">
       <mat-option value="school">Aula</mat-option>
       <mat-option value="class">Klaslokaal</mat-option>
       <mat-option value="meeting_room">Vergaderzaal</mat-option>
@@ -14,26 +14,24 @@
       <mat-option value="nature_people">Studielandschap</mat-option>
       <mat-option value="local_dining">Cafetaria</mat-option>
     </mat-select>
-
-
   </mat-form-field>
-  <p>{{room.type}}</p>
 
+  <!--capaciteit-->
   <mat-form-field>
-    <input matInput placeholder="Capaciteit">
-
+    <input matInput formControlName="capaciteit" placeholder="Capaciteit">
   </mat-form-field>
+
 
   <!--non-validation fields-->
+  <!--drukte-->
   <mat-form-field>
-    <input [disabled]="hasSlider()" matInput placeholder="Drukte">
+    <input formControlName="drukte" matInput placeholder="Drukte">
   </mat-form-field>
 
   <mat-form-field>
-    <input [disabled]="isBookable()" matInput placeholder="Bezet">
-
+    <input formControlName="bezet" matInput placeholder="Bezet">
   </mat-form-field>
 
-  <button (click)="submitRoom()"></button>
+  <button mat-button type="submit">Ruimte wijzigen</button>
 
-</div>
+</form>

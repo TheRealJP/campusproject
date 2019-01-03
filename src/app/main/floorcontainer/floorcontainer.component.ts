@@ -16,6 +16,7 @@ import {RoomIconStatus} from '../_models/roomiconstatus';
 export class FloorcontainerComponent implements OnInit {
   error = '';
   floor: Floor = {
+    id: '',
     floorLevel: 0,
     rooms: [{id: '004', naam: 'test', type: Type.vergaderzaal, hoogte: 100, breedte: 100, drukte: 100, bezet: true}]
   };
