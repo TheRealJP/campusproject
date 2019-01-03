@@ -12,7 +12,14 @@ import {
   MatIconModule,
   MatListModule,
   MatMenuModule,
-  MatCheckboxModule, MatTabsModule, MatSliderModule, MatButtonToggleModule, MatSlideToggleModule, MatCardModule, MatBadgeModule
+  MatCheckboxModule,
+  MatTabsModule,
+  MatSliderModule,
+  MatButtonToggleModule,
+  MatSlideToggleModule,
+  MatCardModule,
+  MatBadgeModule,
+  MatFormFieldModule, MatOptionModule, MatSelectModule, MatInputModule
 } from '@angular/material';
 import { LoginComponent } from './security/login/login.component';
 import { FloorComponent } from './main/floor/floor.component';
@@ -23,6 +30,7 @@ import { FloorcontainerComponent } from './main/floorcontainer/floorcontainer.co
 import {HttpClientModule} from '@angular/common/http';
 import {CommonModule} from '@angular/common';
 import { HomeComponent } from './main/home/home.component';
+import { RoomDetailComponent } from './main/room-detail/room-detail.component';
 
 @NgModule({
   declarations: [
@@ -31,10 +39,15 @@ import { HomeComponent } from './main/home/home.component';
     FloorComponent,
     RoomComponent,
     FloorcontainerComponent,
-    HomeComponent
+    HomeComponent,
+    RoomDetailComponent
   ],
   imports: [
     FormsModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatOptionModule,
+    MatSelectModule,
     MatSlideToggleModule,
     MatCardModule,
     MatBadgeModule,

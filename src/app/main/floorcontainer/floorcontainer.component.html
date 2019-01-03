@@ -1,7 +1,8 @@
 <mat-card id="container">
   <mat-card-content id="listSwitch">
     <mat-button-toggle-group #group="matButtonToggleGroup"
-                             [value]="inFloorMode"
+                             [value]="'false'"
+
                              (change)="onListFloorSwitch(group.value)">
 
       <mat-button-toggle value=false>
@@ -14,20 +15,23 @@
     </mat-button-toggle-group>
   </mat-card-content>
 
+  <!--iconProperty module-->
   <mat-card-content id="iconVisibility">
       <span>
-        <mat-button-toggle value="Naam">Naam</mat-button-toggle>
-        <mat-button-toggle value="Type">Type</mat-button-toggle>
-        <mat-button-toggle value="Bezet">Bezet</mat-button-toggle>
-        <mat-button-toggle value="Drukte">Drukte</mat-button-toggle>
-        <mat-button-toggle value="Beamer">Beamer</mat-button-toggle>
-        <mat-button-toggle value="Capaciteit">Capaciteit</mat-button-toggle>
+        <mat-button-toggle (click)="toggleIconProperty('naam')" >Naam</mat-button-toggle>
+        <mat-button-toggle (click)="toggleIconProperty('type')" value="Type">Type</mat-button-toggle>
+        <mat-button-toggle (click)="toggleIconProperty('bezet')" value="Bezet">Bezet</mat-button-toggle>
+        <mat-button-toggle (click)="toggleIconProperty('drukte')" value="Drukte">Drukte</mat-button-toggle>
+        <mat-button-toggle (click)="toggleIconProperty('beamer')" value="Beamer">Beamer</mat-button-toggle>
+        <mat-button-toggle (click)="toggleIconProperty('capaciteit')" value="Capaciteit">Capaciteit</mat-button-toggle>
       </span>
   </mat-card-content>
 
   <mat-card-content id="floor">
     <app-floor [floorLevel]="floorLevel"
-               [rooms]="rooms"></app-floor>
+               [rooms]="rooms"
+               [roomIconStatus]="roomIconsStatus"
+    ></app-floor>
     <b *ngIf="error">(floorcontainer-component) ERROR: {{error}}</b>
     <b *ngIf="!floor">NO FLOOR FOUND</b>
   </mat-card-content>

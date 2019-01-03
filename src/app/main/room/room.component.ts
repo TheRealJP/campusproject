@@ -2,6 +2,9 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Room} from '../_models/room';
 import {Type} from '../_models/type.enum';
 import {Subscription, timer} from 'rxjs';
+import {RoomIconStatus} from '../_models/roomiconstatus';
+import {Router} from '@angular/router';
+import {RoomService} from '../_services/room.service';
 
 @Component({
   selector: 'app-room',
@@ -13,14 +16,17 @@ import {Subscription, timer} from 'rxjs';
 export class RoomComponent implements OnInit {
   @Input() room: Room;
   @Input() selectedRoom: string;
+  @Input() iconStatus: RoomIconStatus;
   isThisRoomSelected: boolean;
   amountOfHoursBooked: number;
   roomColor = 'rgb(255,255,255)';
+
   private reservationSubscription: Subscription;
   private unselectSubscription: Subscription;
 
-  constructor() {
+  constructor(private router: Router, private roomService: RoomService) {
   }
+
 
   ngOnInit() {
     this.initRoomColor();
@@ -61,6 +67,7 @@ export class RoomComponent implements OnInit {
     if (this.room['bezet'] !== true) {
       this.amountOfHoursBooked = value;
     }
+    this.unselectSubscription.unsubscribe();
     console.log('trying to book this many hours:' + this.amountOfHoursBooked);
   }
 
@@ -85,17 +92,17 @@ export class RoomComponent implements OnInit {
   }
 
   private initRoomColor() {
-    if (this.hasSlider()) {
+    if (this.hasSlider() && this.iconStatus['drukte']) {
       this.getColor(this.room['drukte'], this.room['capaciteit']);
-    } else if (this.isBookable() && this.room['bezet']) {
-      console.log('reached');
-      this.roomColor = 'rgb(255,255,255)';
+    } else if (this.isBookable() && !this.room['bezet']) {
+      this.roomColor = 'rgb(0,255,0)';
     }
   }
 
   // change periodOrScheduler to make it go faster, default should be 1000 == 1s
   private bookingTimer() {
     const maxHours = this.amountOfHoursBooked * 3600;
+
     console.log('maxhours:' + maxHours);
     let timeObject = new Date();
     timeObject = new Date(timeObject.getTime() + maxHours * 10);
@@ -109,5 +116,9 @@ export class RoomComponent implements OnInit {
         this.reservationSubscription.unsubscribe();
       }
     });
+  }
+
+  showDetail() {
+    this.router.navigate([`/rooms/${this.room['id']}`]);
   }
 }

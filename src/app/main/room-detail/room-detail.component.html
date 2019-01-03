@@ -1,0 +1,39 @@
+<div class="example-container">
+
+  <!--validation fields-->
+  <mat-form-field>
+    <input matInput placeholder="Naam">
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-select [(ngModel)]="room['type']" placeholder="Type ruimte">
+      <mat-option value="school">Aula</mat-option>
+      <mat-option value="class">Klaslokaal</mat-option>
+      <mat-option value="meeting_room">Vergaderzaal</mat-option>
+      <mat-option value="business_center">Bureau</mat-option>
+      <mat-option value="nature_people">Studielandschap</mat-option>
+      <mat-option value="local_dining">Cafetaria</mat-option>
+    </mat-select>
+
+
+  </mat-form-field>
+  <p>{{room.type}}</p>
+
+  <mat-form-field>
+    <input matInput placeholder="Capaciteit">
+
+  </mat-form-field>
+
+  <!--non-validation fields-->
+  <mat-form-field>
+    <input [disabled]="hasSlider()" matInput placeholder="Drukte">
+  </mat-form-field>
+
+  <mat-form-field>
+    <input [disabled]="isBookable()" matInput placeholder="Bezet">
+
+  </mat-form-field>
+
+  <button (click)="submitRoom()"></button>
+
+</div>

@@ -6,6 +6,7 @@ import {RoomComponent} from './main/room/room.component';
 import {LoginComponent} from './security/login/login.component';
 import {FloorcontainerComponent} from './main/floorcontainer/floorcontainer.component';
 import {HomeComponent} from './main/home/home.component';
+import {RoomDetailComponent} from './main/room-detail/room-detail.component';
 
 const routes: Routes = [];
 
@@ -18,7 +19,7 @@ export class AppRoutingModule {
 
 export const appRoutes: Routes = [
   {path: 'floors/:id', component: FloorcontainerComponent, canActivate: [AuthGuard]},
-  {path: 'rooms/:id', component: RoomComponent, canActivate: [AuthGuard]/*, data: {roles: [Role.Personeel]}*/},
+  {path: 'rooms/:id', component: RoomDetailComponent, canActivate: [AuthGuard]/*, data: {roles: [Role.Personeel]}*/},
   {path: 'login', component: LoginComponent},
   {path: 'home', component: HomeComponent, canActivate: [AuthGuard]},
   {path: '  ', component: HomeComponent, canActivate: [AuthGuard]},
