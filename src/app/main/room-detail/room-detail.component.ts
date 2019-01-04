@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FloorService} from '../_services/floor.service';
 import {ActivatedRoute} from '@angular/router';
 import {Room} from '../_models/room';
@@ -25,6 +25,7 @@ export class RoomDetailComponent implements OnInit {
     const id = this.activatedRoute.snapshot.paramMap.get('id');
 
     this.updateRoomForm = this.formBuilder.group({
+      id: [{value: '', hidden: true}],
       name: ['', [Validators.required, Validators.minLength(5)]],
       capaciteit: ['', [Validators.required, Validators.max(500)]],
       type: ['', [Validators.required]],
@@ -50,9 +51,11 @@ export class RoomDetailComponent implements OnInit {
       return;
     }
 
-    alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.updateRoomForm.value));
+    // alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.updateRoomForm.value));
 
-    this.floorService.updateRoom(this.room);
+    this.floorService.updateRoom(this.room).subscribe(value => {
+      console.log(value);
+    });
   }
 }
 

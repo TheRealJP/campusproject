@@ -33,15 +33,16 @@ export class FloorService {
 
 
   fetchRoomById(roomid: string): Observable<Room> {
-      return this.http.get<Room>(`${this.baseUrl}/floors/${roomid.charAt(0)}/rooms/${roomid}`).pipe(
-        tap(() => log('fetched floor' + roomid.charAt(0) + ' room:' + roomid))
-      );
+    return this.http.get<Room>(`${this.baseUrl}/floors/${roomid.charAt(0)}/rooms/${roomid}`).pipe(
+      tap(() => log('fetched floor' + roomid.charAt(0) + ' room:' + roomid))
+    );
   }
 
-  updateRoom(r: Room) {
+  updateRoom(r: Room): Observable<Room> {
     console.log(r['id']);
-    return this.http.put(`${this.baseUrl}/rooms/"${r['id']}"`, {r}).pipe(
-      tap((result) => log('updated room' + result)));
+    return this.http.put<Room>(`${this.baseUrl}/rooms/"${r['id']}"`, {r}).pipe(
+      tap((result) => log('updated room' + result), e => log('error:' + e))
+    );
   }
 
   hasSlider(room: Room) {
