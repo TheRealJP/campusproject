@@ -3,3 +3,13 @@
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
+app-root {
+  display: grid;
+  grid-template-columns: 1fr 3fr 1fr;
+  grid-template-rows: 80px minmax(650px, 1fr) auto;
+  grid-template-areas:
+    "top top top"
+    "middleLeft middle middleRight"
+    "bottom bottom bottom";
+}
+

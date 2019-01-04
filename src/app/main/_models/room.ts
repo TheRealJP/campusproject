@@ -10,4 +10,6 @@ export class Room {
   drukte: number;
   hoogte: number;
   breedte: number;
+  x: number;
+  y: number;
 }

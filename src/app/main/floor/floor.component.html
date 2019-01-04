@@ -1,7 +1,15 @@
-<h2 mat-card-title>Verdieping {{floorLevel}}</h2>
-<app-room *ngFor="let r of rooms"
-          [room]="r"
-          [iconStatus]=roomIconStatus
-          [selectedRoom]="selectedRoom"
-          (click)="selectRoom(r.naam)">
-</app-room>
+<div id="floorContainer">
+  <h2 mat-card-title>Verdieping {{floorLevel}}</h2>
+
+
+  <div id="roomContainer">
+    roomcontainer
+    <app-room *ngFor="let r of rooms"
+              [room]="r"
+              [iconStatus]=roomIconStatus
+              [selectedRoom]="selectedRoom"
+              (click)="selectRoom(r.naam)">
+    </app-room>
+  </div>
+
+</div>

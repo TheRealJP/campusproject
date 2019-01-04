@@ -1,4 +1,5 @@
-<div id="roomContainer" [ngStyle]="{'backgroundColor': roomColor}">
+<div id="room" [ngStyle]="{'backgroundColor': roomColor}">
+
   <!--default info-->
   <span class="roomInfo" *ngIf="iconStatus['naam']">{{room['name']}}</span>
   <span class="roomInfo" *ngIf="iconStatus['type']"><mat-icon>{{room['type']}}</mat-icon></span>
@@ -22,6 +23,7 @@
     </button>
   </span>
 
+  <!--extraUI-->
   <div id="extraUI" *ngIf="isThisRoomSelected">
     <!--slider module-->
     <span *ngIf="hasSlider() && iconStatus['drukte']">
@@ -54,4 +56,8 @@
 
   <div *ngIf="isThisRoomSelected">this room has been selected</div>
 </div>
+
+
+
+
 

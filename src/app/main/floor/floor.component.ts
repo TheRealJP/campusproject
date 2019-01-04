@@ -1,6 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Room} from '../_models/room';
-import {FloorService} from '../_services/floor.service';
 import {RoomIconStatus} from '../_models/roomiconstatus';
 
 @Component({
@@ -12,6 +11,8 @@ export class FloorComponent implements OnInit {
   @Input() rooms: Room[];
   @Input() floorLevel: number;
   @Input() roomIconStatus: RoomIconStatus;
+  @Input() inFloorMode: false;
+
   private selectedRoom: string;
   private error: '';
 

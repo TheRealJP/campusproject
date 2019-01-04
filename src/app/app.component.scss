@@ -1,4 +1,11 @@
 @media (min-width: 540px) {
+  mat-toolbar {
+    grid-area: top
+  }
 
+  #application{
+    grid-area: middle;
+  }
 
 }
+

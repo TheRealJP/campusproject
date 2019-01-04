@@ -17,12 +17,14 @@ export class RoomComponent implements OnInit {
   @Input() room: Room;
   @Input() selectedRoom: string;
   @Input() iconStatus: RoomIconStatus;
+  @Input() inFloorMode: boolean;
   isThisRoomSelected: boolean;
   amountOfHoursBooked: number;
   roomColor = 'rgb(255,255,255)';
 
   private reservationSubscription: Subscription;
   private unselectSubscription: Subscription;
+  private currentStyles: { top: number };
 
   constructor(private router: Router, private roomService: RoomService) {
   }
@@ -31,6 +33,12 @@ export class RoomComponent implements OnInit {
   ngOnInit() {
     this.initRoomColor();
     this.amountOfHoursBooked = 1;
+    // this.currentStyles = {
+    //   'top': this.inFloorMode ? this.room['y'] : ,
+    //   'left': this.inFloorMode ? this.room['x'] : ,
+    //   'width': this.inFloorMode ? this.room['width'] : ,
+    //   'height': this.inFloorMode ? this.room['heigth'] :
+    // };
   }
 
   //  todo:deselect room when selecting another

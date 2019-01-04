@@ -9,7 +9,13 @@
             routerLink="/floor/{{floor.key}}"
             (click)="switchFloors(floor)">Verdieping {{floor.key}}</button>
   </mat-toolbar-row>
+
+  <nav *ngIf="!currentUser">
+    <a routerLink="/login">Login</a>
+  </nav>
 </mat-toolbar>
 
 <!--content-->
-<router-outlet></router-outlet>
+<div id="application">
+  <router-outlet></router-outlet>
+</div>

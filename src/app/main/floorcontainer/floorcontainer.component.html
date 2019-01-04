@@ -1,24 +1,23 @@
-<mat-card id="container">
-  <mat-card-content id="listSwitch">
-    <mat-button-toggle-group #group="matButtonToggleGroup"
-                             [value]="'false'"
+<mat-card id="floorControls">
 
-                             (change)="onListFloorSwitch(group.value)">
+  <mat-card-content>
+    <!--switch from floor to list-->
+    <span id="listSwitch">
+      <mat-button-toggle-group #group="matButtonToggleGroup"
+                               [value]="'false'"
+                               (change)="onListFloorSwitch(group.value)">
+        <mat-button-toggle value=false>
+          <mat-icon>list</mat-icon>
+        </mat-button-toggle>
+        <mat-button-toggle value=true>
+          <mat-icon>dashboard</mat-icon>
+        </mat-button-toggle>
+      </mat-button-toggle-group>
+    </span>
 
-      <mat-button-toggle value=false>
-        <mat-icon>list</mat-icon>
-      </mat-button-toggle>
-      <mat-button-toggle value=true>
-        <mat-icon>dashboard</mat-icon>
-      </mat-button-toggle>
-
-    </mat-button-toggle-group>
-  </mat-card-content>
-
-  <!--iconProperty module-->
-  <mat-card-content id="iconVisibility">
-      <span>
-        <mat-button-toggle (click)="toggleIconProperty('naam')" >Naam</mat-button-toggle>
+    <!--iconProperty module-->
+    <span id="iconVisibility">
+        <mat-button-toggle (click)="toggleIconProperty('naam')">Naam</mat-button-toggle>
         <mat-button-toggle (click)="toggleIconProperty('type')" value="Type">Type</mat-button-toggle>
         <mat-button-toggle (click)="toggleIconProperty('bezet')" value="Bezet">Bezet</mat-button-toggle>
         <mat-button-toggle (click)="toggleIconProperty('drukte')" value="Drukte">Drukte</mat-button-toggle>
@@ -26,12 +25,16 @@
         <mat-button-toggle (click)="toggleIconProperty('capaciteit')" value="Capaciteit">Capaciteit</mat-button-toggle>
       </span>
   </mat-card-content>
+</mat-card>
 
+
+
+<mat-card id="floorContainerContainer">
   <mat-card-content id="floor">
     <app-floor [floorLevel]="floorLevel"
                [rooms]="rooms"
-               [roomIconStatus]="roomIconsStatus"
-    ></app-floor>
+               [roomIconStatus]="roomIconsStatus">$
+    </app-floor>
     <b *ngIf="error">(floorcontainer-component) ERROR: {{error}}</b>
     <b *ngIf="!floor">NO FLOOR FOUND</b>
   </mat-card-content>

@@ -18,14 +18,15 @@ export class FloorcontainerComponent implements OnInit {
   floor: Floor = {
     id: '',
     floorLevel: 0,
-    rooms: [{id: '004', naam: 'test', type: Type.vergaderzaal, hoogte: 100, breedte: 100, drukte: 100, bezet: true}]
+    rooms: [{id: '004', naam: 'test', type: Type.vergaderzaal, hoogte: 100, breedte: 100, drukte: 100, bezet: true, y: 0, x: 0}]
   };
   floorLevel: number;
   rooms: Room[];
   inFloorMode = false;
   roomIconsStatus: RoomIconStatus;
 
-  constructor(private floorService: FloorService, private route: ActivatedRoute) {
+  constructor(private floorService: FloorService,
+              private route: ActivatedRoute) {
   }
 
   ngOnInit(): void {
