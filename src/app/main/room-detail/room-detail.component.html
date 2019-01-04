@@ -27,7 +27,7 @@
 
     <!--beamer-->
     <mat-form-field>
-      <mat-select formControlName="beamer" placeholder="Beamer aanwezig (Ja/Nee)">
+      <mat-select formControlName="beamer" placeholder="Beamer aanwezig: {{room['beamer'] ? 'Ja':'Nee'}}">
         <mat-option value="true">Ja</mat-option>
         <mat-option value="false">Nee</mat-option>
       </mat-select>
@@ -41,7 +41,7 @@
 
     <!--bezet-->
     <mat-form-field>
-      <mat-select formControlName="bezet" placeholder="Ruimte bezet (Ja/Nee)">
+      <mat-select formControlName="bezet" placeholder="Ruimte bezet: {{room['bezet'] ? 'Ja':'Nee'}}">
         <mat-option value="true">Ja</mat-option>
         <mat-option value="false">Nee</mat-option>
       </mat-select>

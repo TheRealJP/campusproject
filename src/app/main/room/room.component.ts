@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnChanges, OnInit} from '@angular/core';
 import {Room} from '../_models/room';
 import {Type} from '../_models/type.enum';
 import {Subscription, timer} from 'rxjs';
@@ -12,11 +12,11 @@ import {Router} from '@angular/router';
 })
 
 // todo:location adhv breedte & hoogte
-export class RoomComponent implements OnInit {
+export class RoomComponent implements OnInit, OnChanges {
   @Input() room: Room;
   @Input() selectedRoom: string;
   @Input() iconStatus: RoomIconStatus;
-  @Input() inFloorMode: boolean;
+  @Input() inFloorMode: Boolean;
   isThisRoomSelected: boolean;
   amountOfHoursBooked: number;
   roomColor = 'rgb(255,255,255)';
@@ -24,28 +24,41 @@ export class RoomComponent implements OnInit {
   private reservationSubscription: Subscription;
   private unselectSubscription: Subscription;
   private currentStyles: {
-    backgroundColor: string;
-    top: number;
-    left: number;
-    width: number;
-    height: number
+    backgroundColor: string; top: string; left: string; width: string; height: string
   };
 
   constructor(private router: Router) {
   }
 
+
   ngOnInit() {
     this.initRoomColor();
     this.amountOfHoursBooked = 1;
-    console.log('(room) this.inFloorMode:' + this.inFloorMode);
-    console.log('(room) naam:' + this.room['naam']);
-    // this.currentStyles = {
-    //   'backgroundColor': this.roomColor,
-    //   'top': this.inFloorMode ? this.room['y'] : 100,
-    //   'left': this.inFloorMode ? this.room['x'] : this.room['x'],
-    //   'width': this.inFloorMode ? this.room['breedte'] : this.room['breedte'],
-    //   'height': this.inFloorMode ? this.room['hoogte'] : this.room['hoogte']
-    // };
+    this.currentStyles = {
+      'backgroundColor': this.roomColor,
+      'top': this.inFloorMode ? this.room['y'] + 'px' : 0 + 'px',
+      'left': this.inFloorMode ? this.room['x'] + 'px' : 0 + 'px',
+      'height': this.inFloorMode ? this.room['hoogte'] + 'px' : '',
+      'width': this.inFloorMode ? this.room['breedte'] + 'px' : ''
+    };
+
+    // 'backgroundColor': roomColor,
+    //   'top': inFloorMode ? room['y'] + 'px' : 0 + 'px',
+    //   'left': inFloorMode ? room['x'] + 'px' : 0 + 'px',
+    //   'height': inFloorMode ? room['hoogte'] + 'px' : '',
+    //   'width': inFloorMode ? room['breedte'] + 'px' : ''
+  }
+
+  ngOnChanges() {
+    console.log('roomcomponent floormode:' + this.inFloorMode);
+    this.currentStyles = {
+      'backgroundColor': this.roomColor,
+      'top': this.inFloorMode ? this.room['y'] + 'px' : 0 + 'px',
+      'left': this.inFloorMode ? this.room['x'] + 'px' : 0 + 'px',
+      'height': this.inFloorMode ? this.room['hoogte'] + 'px' : '',
+      'width': this.inFloorMode ? this.room['breedte'] + 'px' : ''
+    };
+    console.log(this.currentStyles);
   }
 
   //  todo:deselect room when selecting another

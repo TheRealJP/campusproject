@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnChanges, OnInit} from '@angular/core';
 import {Room} from '../_models/room';
 import {RoomIconStatus} from '../_models/roomiconstatus';
 
@@ -7,12 +7,11 @@ import {RoomIconStatus} from '../_models/roomiconstatus';
   templateUrl: './floor.component.html',
   styleUrls: ['./floor.component.scss']
 })
-export class FloorComponent implements OnInit {
+export class FloorComponent implements OnInit, OnChanges {
   @Input() rooms: Room[];
   @Input() floorLevel: number;
   @Input() roomIconStatus: RoomIconStatus;
-  @Input() inFloorMode: boolean;
-
+  @Input() inFloorMode: Boolean;
   private selectedRoom: string;
   private error: '';
 
@@ -20,6 +19,10 @@ export class FloorComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  ngOnChanges() {
+    // console.log('floorcomponent floormode:' + this.inFloorMode);
   }
 
   selectRoom(rname: string) {

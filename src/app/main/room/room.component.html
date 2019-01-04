@@ -1,12 +1,10 @@
 <div id="roomContainer" [ngClass]="inFloorMode ? 'roomContainerRelative':'roomContainerNone'">
-
   <div id="room" [ngClass]="inFloorMode? 'roomRelative' : 'roomNone'"
-       [ngStyle]="{
-          'backgroundColor': roomColor,
-          'top': inFloorMode ?  room['y']+'px': 0+'px' ,
-          'left': inFloorMode ? room['x']+'px' : 0+'px',
-          'height':  inFloorMode ? room['hoogte']+'px' : '',
-          'width':  inFloorMode ? room['breedte']+'px' : ''}">
+       [ngStyle]="{    'backgroundColor': roomColor,
+      'top': inFloorMode ? room['y'] + 'px' : 0 + 'px',
+      'left': inFloorMode ? room['x'] + 'px' : 0 + 'px',
+      'height': inFloorMode ? room['hoogte'] + 'px' : '',
+      'width': inFloorMode ? room['breedte'] + 'px' : ''}">
 
     <!--default info-->
     <span class="roomInfo" *ngIf="iconStatus['naam']">{{room['name']}}</span>

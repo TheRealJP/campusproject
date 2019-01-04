@@ -22,11 +22,12 @@ export class FloorcontainerComponent implements OnInit {
   };
   floorLevel: number;
   rooms: Room[];
-  inFloorMode = false;
+  inFloorMode : Boolean;
   roomIconsStatus: RoomIconStatus;
 
   constructor(private floorService: FloorService,
               private route: ActivatedRoute) {
+
   }
 
   ngOnInit(): void {
@@ -45,11 +46,13 @@ export class FloorcontainerComponent implements OnInit {
   onListFloorSwitch(value: any) {
     this.inFloorMode = value;
 
-    if (value === 'false') {
-      console.log('switched to list mode');
-    } else {
-      console.log('switched to floor mode');
-    }
+    // if (value === 'false') {
+    //   console.log('switched to list mode');
+    // } else {
+    //   console.log('switched to floor mode');
+    // }
+    // console.log('value' + this.inFloorMode);
+
   }
 
   toggleIconProperty(propertyName: string) {
