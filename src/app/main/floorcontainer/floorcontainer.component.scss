@@ -1,34 +1,18 @@
-#floorContainerContainer {;
-  border: 6px cornflowerblue solid;
+
+
+#floorControls {
+  display: flex;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  justify-content: space-between;
+
+  #iconVisibility {
+    mat-button-toggle {
+      margin-right: 0.2rem;
+    }
+  }
 }
 
 #floor {
   border: 6px palevioletred solid;
 }
-
-#floorControls{
-  margin-top: 1rem;
-  grid-area: controlArea;
-
-
-  #iconVisibility {
-    display: flex;
-    justify-content: left;
-
-    span {
-      mat-button-toggle {
-        margin-right: 0.5rem;
-      }
-    }
-  }
-
-
-  #listSwitch{
-    display: flex;
-    justify-content: right;
-
-  }
-
-}
-
-

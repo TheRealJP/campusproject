@@ -1,49 +1,53 @@
-<form *ngIf="roomObservable | async" [formGroup]="updateRoomForm" (ngSubmit)="f.name.valid && submitRoom()" class="example-container">
+<mat-card id="roomDetail">
+  <form *ngIf="roomObservable | async" [formGroup]="updateRoomForm" (ngSubmit)="f.name.valid && submitRoom()"
+        class="example-container">
 
-  <!--validation fields-->
-  <mat-form-field>
-    <input matInput formControlName="name" placeholder="Naam" [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
-  </mat-form-field>
+    <!--validation fields-->
+    <mat-form-field>
+      <input matInput formControlName="name" placeholder="Naam"
+             [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
+    </mat-form-field>
 
-  <!--style-->
-  <mat-form-field>
-    <mat-select formControlName="type" placeholder="Type ruimte">
-      <mat-option value="school">Aula</mat-option>
-      <mat-option value="class">Klaslokaal</mat-option>
-      <mat-option value="meeting_room">Vergaderzaal</mat-option>
-      <mat-option value="business_center">Bureau</mat-option>
-      <mat-option value="nature_people">Studielandschap</mat-option>
-      <mat-option value="local_dining">Cafetaria</mat-option>
-    </mat-select>
-  </mat-form-field>
+    <!--style-->
+    <mat-form-field>
+      <mat-select formControlName="type" placeholder="Type ruimte">
+        <mat-option value="school">Aula</mat-option>
+        <mat-option value="class">Klaslokaal</mat-option>
+        <mat-option value="meeting_room">Vergaderzaal</mat-option>
+        <mat-option value="business_center">Bureau</mat-option>
+        <mat-option value="nature_people">Studielandschap</mat-option>
+        <mat-option value="local_dining">Cafetaria</mat-option>
+      </mat-select>
+    </mat-form-field>
 
-  <!--capaciteit-->
-  <mat-form-field>
-    <input matInput formControlName="capaciteit" placeholder="Capaciteit">
-  </mat-form-field>
+    <!--capaciteit-->
+    <mat-form-field>
+      <input matInput formControlName="capaciteit" placeholder="Capaciteit">
+    </mat-form-field>
 
-  <!--beamer-->
-  <mat-form-field>
-    <mat-select formControlName="beamer" placeholder="Beamer aanwezig (Ja/Nee)">
-      <mat-option value="true">Ja</mat-option>
-      <mat-option value="false">Nee</mat-option>
-    </mat-select>
-  </mat-form-field>
+    <!--beamer-->
+    <mat-form-field>
+      <mat-select formControlName="beamer" placeholder="Beamer aanwezig (Ja/Nee)">
+        <mat-option value="true">Ja</mat-option>
+        <mat-option value="false">Nee</mat-option>
+      </mat-select>
+    </mat-form-field>
 
-  <!--non-validation fields-->
-  <!--drukte-->
-  <mat-form-field>
-    <input formControlName="drukte" matInput placeholder="Drukte">
-  </mat-form-field>
+    <!--non-validation fields-->
+    <!--drukte-->
+    <mat-form-field>
+      <input formControlName="drukte" matInput placeholder="Drukte">
+    </mat-form-field>
 
-  <!--bezet-->
-  <mat-form-field>
-    <mat-select formControlName="bezet" placeholder="Ruimte bezet (Ja/Nee)">
-      <mat-option value="true">Ja</mat-option>
-      <mat-option value="false">Nee</mat-option>
-    </mat-select>
-  </mat-form-field>
+    <!--bezet-->
+    <mat-form-field>
+      <mat-select formControlName="bezet" placeholder="Ruimte bezet (Ja/Nee)">
+        <mat-option value="true">Ja</mat-option>
+        <mat-option value="false">Nee</mat-option>
+      </mat-select>
+    </mat-form-field>
 
-  <button mat-button type="submit">Ruimte wijzigen</button>
+    <button mat-button type="submit">Ruimte wijzigen</button>
 
-</form>
+  </form>
+</mat-card>

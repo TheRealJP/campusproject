@@ -11,12 +11,37 @@ mat-slider {
 }
 
 
+.roomContainerRelative {
+  position: relative;
+}
+
+.roomContainerNone {
+  border: red 4px solid;
+}
+
+//use ng class to switch between relative parent + absolute child
+
+.roomRelative{
+  position: absolute;
+}
+
+
+.roomNone{
+}
+
 #room {
   border: lightslategray 2px solid;
-  padding: 45px;
+  padding: 15px;
 
   #bookingModule {
-    display: inline-block;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  #slider {
+    display: flex;
+    justify-content: center;
   }
 }
 

@@ -4,7 +4,6 @@ import {Type} from '../_models/type.enum';
 import {Subscription, timer} from 'rxjs';
 import {RoomIconStatus} from '../_models/roomiconstatus';
 import {Router} from '@angular/router';
-import {RoomService} from '../_services/room.service';
 
 @Component({
   selector: 'app-room',
@@ -24,20 +23,28 @@ export class RoomComponent implements OnInit {
 
   private reservationSubscription: Subscription;
   private unselectSubscription: Subscription;
-  private currentStyles: { top: number };
+  private currentStyles: {
+    backgroundColor: string;
+    top: number;
+    left: number;
+    width: number;
+    height: number
+  };
 
-  constructor(private router: Router, private roomService: RoomService) {
+  constructor(private router: Router) {
   }
-
 
   ngOnInit() {
     this.initRoomColor();
     this.amountOfHoursBooked = 1;
+    console.log('(room) this.inFloorMode:' + this.inFloorMode);
+    console.log('(room) naam:' + this.room['naam']);
     // this.currentStyles = {
-    //   'top': this.inFloorMode ? this.room['y'] : ,
-    //   'left': this.inFloorMode ? this.room['x'] : ,
-    //   'width': this.inFloorMode ? this.room['width'] : ,
-    //   'height': this.inFloorMode ? this.room['heigth'] :
+    //   'backgroundColor': this.roomColor,
+    //   'top': this.inFloorMode ? this.room['y'] : 100,
+    //   'left': this.inFloorMode ? this.room['x'] : this.room['x'],
+    //   'width': this.inFloorMode ? this.room['breedte'] : this.room['breedte'],
+    //   'height': this.inFloorMode ? this.room['hoogte'] : this.room['hoogte']
     // };
   }
 
@@ -99,6 +106,10 @@ export class RoomComponent implements OnInit {
     this.roomColor = 'rgb(' + redPlace + ',' + greenPlace + ',0)';
   }
 
+  showDetail() {
+    this.router.navigate([`/rooms/${this.room['id']}`]);
+  }
+
   private initRoomColor() {
     if (this.hasSlider() && this.iconStatus['drukte']) {
       this.getColor(this.room['drukte'], this.room['capaciteit']);
@@ -126,7 +137,4 @@ export class RoomComponent implements OnInit {
     });
   }
 
-  showDetail() {
-    this.router.navigate([`/rooms/${this.room['id']}`]);
-  }
 }

@@ -11,7 +11,7 @@ export class FloorComponent implements OnInit {
   @Input() rooms: Room[];
   @Input() floorLevel: number;
   @Input() roomIconStatus: RoomIconStatus;
-  @Input() inFloorMode: false;
+  @Input() inFloorMode: boolean;
 
   private selectedRoom: string;
   private error: '';

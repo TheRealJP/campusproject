@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FloorService} from '../_services/floor.service';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {Room} from '../_models/room';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Observable} from 'rxjs';
@@ -19,7 +19,8 @@ export class RoomDetailComponent implements OnInit {
 
   constructor(private floorService: FloorService,
               private activatedRoute: ActivatedRoute,
-              private formBuilder: FormBuilder) {
+              private formBuilder: FormBuilder,
+              private router: Router) {
   }
 
   ngOnInit() {
@@ -66,6 +67,8 @@ export class RoomDetailComponent implements OnInit {
     this.floorService.updateRoom(this.room).subscribe(value => {
       console.log(value);
     });
+
+    this.router.navigate([`/floors/${this.room['id'].charAt(0)}`]);
   }
 }
 

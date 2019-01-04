@@ -1,19 +1,26 @@
-<div id="room" [ngStyle]="{'backgroundColor': roomColor}">
+<div id="roomContainer" [ngClass]="inFloorMode ? 'roomContainerRelative':'roomContainerNone'">
 
-  <!--default info-->
-  <span class="roomInfo" *ngIf="iconStatus['naam']">{{room['name']}}</span>
-  <span class="roomInfo" *ngIf="iconStatus['type']"><mat-icon>{{room['type']}}</mat-icon></span>
-  <!--non default-->
-  <span class="roomInfo" *ngIf="room['beamer'] && iconStatus['beamer']"><mat-icon>camera</mat-icon></span>
-  <span class="roomInfo" *ngIf="room['capaciteit'] && iconStatus['capaciteit']">
+  <div id="room" [ngClass]="inFloorMode? 'roomRelative' : 'roomNone'"
+       [ngStyle]="{
+          'backgroundColor': roomColor,
+          'top': inFloorMode ?  room['y']+'px': 0+'px' ,
+          'left': inFloorMode ? room['x']+'px' : 0+'px',
+          'height':  inFloorMode ? room['hoogte']+'px' : '',
+          'width':  inFloorMode ? room['breedte']+'px' : ''}">
+
+    <!--default info-->
+    <span class="roomInfo" *ngIf="iconStatus['naam']">{{room['name']}}</span>
+    <span class="roomInfo" *ngIf="iconStatus['type']"><mat-icon>{{room['type']}}</mat-icon></span>
+    <!--non default-->
+    <span class="roomInfo" *ngIf="room['beamer'] && iconStatus['beamer']"><mat-icon>camera</mat-icon></span>
+    <span class="roomInfo" *ngIf="room['capaciteit'] && iconStatus['capaciteit']">
     <mat-icon matBadge="{{room['capaciteit']}}" matBadgeSize="medium" matBadgePosition="above after">
       person
     </mat-icon>
   </span>
 
-
-  <!--edit-->
-  <span style="float: right;">
+    <!--edit-->
+    <span style="float: right;">
     <button (click)="showDetail()" mat-icon-button>
       <mat-icon>edit</mat-icon>
     </button>
@@ -23,22 +30,22 @@
     </button>
   </span>
 
-  <!--extraUI-->
-  <div id="extraUI" *ngIf="isThisRoomSelected">
-    <!--slider module-->
-    <span *ngIf="hasSlider() && iconStatus['drukte']">
-      <span>Drukte: </span>
-      <mat-slider [step]="1"
-                  [min]="0"
-                  [max]="room['capaciteit']"
-                  [(ngModel)]="room['drukte']"
-                  (change)="getColor(room['drukte'],room['capaciteit'])">
-      </mat-slider>
-      <span>{{room['drukte']}}</span>
-    </span>
+    <!--extraUI-->
+    <div id="extraUI" *ngIf="isThisRoomSelected">
+      <!--slider module-->
+      <span id="slider" *ngIf="hasSlider() && iconStatus['drukte']">
+        <mat-slider [step]="1"
+                    [min]="0"
+                    [thumbLabel]=true
+                    [max]="room['capaciteit']"
+                    [(ngModel)]="room['drukte']"
+                    (change)="getColor(room['drukte'],room['capaciteit'])"
+                    color="primary">
+        </mat-slider>
+      </span>
 
-    <!--booking module-->
-    <span id="bookingModule" *ngIf="isBookable() && iconStatus['bezet']">
+      <!--booking module-->
+      <span id="bookingModule" *ngIf="isBookable() && iconStatus['bezet']">
       <mat-button-toggle-group #group="matButtonToggleGroup"
                                [disabled]="room['bezet']"
                                [value]="'1'"
@@ -52,9 +59,10 @@
               mat-raised-button>
         Reserveer voor {{amountOfHoursBooked}} uur</button>
     </span>
-  </div>
+    </div>
 
-  <div *ngIf="isThisRoomSelected">this room has been selected</div>
+    <div *ngIf="isThisRoomSelected">this room has been selected</div>
+  </div>
 </div>
 
 
