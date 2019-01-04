@@ -1,6 +1,7 @@
 <div id="roomContainer" [ngClass]="inFloorMode ? 'roomContainerRelative':'roomContainerNone'">
   <div id="room" [ngClass]="inFloorMode? 'roomRelative' : 'roomNone'"
-       [ngStyle]="{    'backgroundColor': roomColor,
+
+       [ngStyle]="currentStyles && { 'backgroundColor': roomColor,
       'top': inFloorMode ? room['y'] + 'px' : 0 + 'px',
       'left': inFloorMode ? room['x'] + 'px' : 0 + 'px',
       'height': inFloorMode ? room['hoogte'] + 'px' : '',
@@ -11,12 +12,7 @@
     <span class="roomInfo" *ngIf="iconStatus['type']"><mat-icon>{{room['type']}}</mat-icon></span>
     <!--non default-->
     <span class="roomInfo" *ngIf="room['beamer'] && iconStatus['beamer']"><mat-icon>camera</mat-icon></span>
-    <span class="roomInfo" *ngIf="room['capaciteit'] && iconStatus['capaciteit']">
-    <mat-icon matBadge="{{room['capaciteit']}}" matBadgeSize="medium" matBadgePosition="above after">
-      person
-    </mat-icon>
-  </span>
-
+    <span class="roomInfo" *ngIf="room['capaciteit'] && iconStatus['capaciteit']"><mat-icon>person</mat-icon></span>
     <!--edit-->
     <span style="float: right;">
     <button (click)="showDetail()" mat-icon-button>

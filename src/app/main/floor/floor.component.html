@@ -1,4 +1,3 @@
-<div id="floor">
 <h2 mat-card-title>Verdieping {{floorLevel}}</h2>
 
 <app-room *ngFor="let r of rooms"
@@ -8,4 +7,3 @@
           [selectedRoom]="selectedRoom"
           (click)="selectRoom(r.naam)">
 </app-room>
-</div>

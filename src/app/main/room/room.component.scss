@@ -11,7 +11,7 @@ mat-slider {
 }
 
 #room {
-  border: lightslategray 2px solid;
+  border: lightslategray 1px solid;
   padding: 15px;
   margin-bottom:  15px;
 
@@ -29,17 +29,16 @@ mat-slider {
 
 //use ng class to switch between relative parent + absolute child
 .roomContainerRelative {
-  position: absolute;
+  position: relative;
   width: 1px;
   height: 1px;
 }
 
 .roomContainerNone {
-  border: red 4px solid;
 }
 
 .roomRelative {
-  position: relative;
+  position: absolute;
 }
 
 .roomNone {
