@@ -1,8 +1,7 @@
 <form *ngIf="roomObservable | async" [formGroup]="updateRoomForm" (ngSubmit)="f.name.valid && submitRoom()" class="example-container">
 
-
   <!--validation fields-->
-  <mat-form-field [hideRequiredMarker]=true>
+  <mat-form-field>
     <input matInput formControlName="name" placeholder="Naam" [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
   </mat-form-field>
 
@@ -25,12 +24,11 @@
 
   <!--beamer-->
   <mat-form-field>
-    <mat-select formControlName="beamer" placeholder="Beamer aanwezig">
+    <mat-select formControlName="beamer" placeholder="Beamer aanwezig (Ja/Nee)">
       <mat-option value="true">Ja</mat-option>
       <mat-option value="false">Nee</mat-option>
     </mat-select>
   </mat-form-field>
-
 
   <!--non-validation fields-->
   <!--drukte-->
@@ -38,8 +36,12 @@
     <input formControlName="drukte" matInput placeholder="Drukte">
   </mat-form-field>
 
+  <!--bezet-->
   <mat-form-field>
-    <input formControlName="bezet" matInput placeholder="Bezet">
+    <mat-select formControlName="bezet" placeholder="Ruimte bezet (Ja/Nee)">
+      <mat-option value="true">Ja</mat-option>
+      <mat-option value="false">Nee</mat-option>
+    </mat-select>
   </mat-form-field>
 
   <button mat-button type="submit">Ruimte wijzigen</button>

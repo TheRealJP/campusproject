@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FloorService} from '../_services/floor.service';
 import {ActivatedRoute} from '@angular/router';
 import {Room} from '../_models/room';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Observable} from 'rxjs';
 import {tap} from 'rxjs/operators';
 
@@ -17,16 +17,20 @@ export class RoomDetailComponent implements OnInit {
   private submitted: boolean;
   private roomObservable: Observable<Room>;
 
-
-  constructor(private floorService: FloorService, private activatedRoute: ActivatedRoute, private formBuilder: FormBuilder) {
+  constructor(private floorService: FloorService,
+              private activatedRoute: ActivatedRoute,
+              private formBuilder: FormBuilder) {
   }
 
   ngOnInit() {
-    const id = this.activatedRoute.snapshot.paramMap.get('id');
+    /**
+     initialize reactive form, taking in consideration we need to wait for room to be fetched async
+     we do a second fetch to fill in the class variable this.room
+     */
 
+    const id = this.activatedRoute.snapshot.paramMap.get('id');
     this.updateRoomForm = this.formBuilder.group({
-      id: [{value: '', hidden: true}],
-      name: ['', [Validators.required, Validators.minLength(5)]],
+      name: new FormControl({value: ''}, [Validators.required, Validators.minLength(5)]) /*['', [Validators.required, Validators.minLength(5)]]*/,
       capaciteit: ['', [Validators.required, Validators.max(500)]],
       type: ['', [Validators.required]],
       beamer: '',
@@ -51,7 +55,13 @@ export class RoomDetailComponent implements OnInit {
       return;
     }
 
-    // alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.updateRoomForm.value));
+    // update room values from form
+    this.room['name'] = this.updateRoomForm.value['name'];
+    this.room['type'] = this.updateRoomForm.value['type'];
+    this.room['capaciteit'] = this.updateRoomForm.value['capaciteit'];
+    this.room['bezet'] = this.updateRoomForm.value['bezet'];
+    this.room['drukte'] = this.updateRoomForm.value['drukte'];
+    this.room['beamer'] = this.updateRoomForm.value['beamer'];
 
     this.floorService.updateRoom(this.room).subscribe(value => {
       console.log(value);
