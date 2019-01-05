@@ -1,12 +1,19 @@
 <mat-card id="roomDetail">
-  <form *ngIf="roomObservable | async" [formGroup]="updateRoomForm" (ngSubmit)="f.name.valid && submitRoom()"
-        class="example-container">
+  <form *ngIf="roomObservable | async" [formGroup]="updateRoomForm" (ngSubmit)="form.name.valid && submitRoom()"
+        class="form-container">
 
     <!--validation fields-->
     <mat-form-field>
       <input matInput formControlName="name" placeholder="Naam"
-             [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
+             [ngClass]="{ 'is-invalid': submitted && form['name'].errors }">
+
+
     </mat-form-field>
+
+    <div *ngIf="submitted && form['name'].errors" class="alert">
+      <div >Vergeet de naam niet in te vullen</div>
+      <div *ngIf="form.name.errors.minLength">Min. 5 karakters</div>
+    </div>
 
     <!--style-->
     <mat-form-field>

@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
     });
 
     // https://stackoverflow.com/questions/8884071/javascript-shorthand-ternary-operator
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/jackpot';
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
 
   get form() {

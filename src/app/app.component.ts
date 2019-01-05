@@ -13,7 +13,7 @@ import {KeyValue} from '@angular/common';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'campusproject';
+  title = 'Campus';
   currentUser: User;
   floors: Floor[] = [];
 

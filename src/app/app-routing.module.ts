@@ -22,7 +22,7 @@ export const appRoutes: Routes = [
   {path: 'floors/:id', component: FloorcontainerComponent, canActivate: [AuthGuard]},
   {path: 'rooms/:id', component: RoomDetailComponent, canActivate: [AuthGuard], data: {roles: [Role.Personeel]}},
   {path: 'login', component: LoginComponent},
-  {path: 'home', component: HomeComponent, canActivate: [AuthGuard]},
+  {path: 'home', component: HomeComponent},
   {path: '  ', component: HomeComponent, canActivate: [AuthGuard]},
   {path: '**', component: HomeComponent, canActivate: [AuthGuard]}
 ];

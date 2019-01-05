@@ -4,6 +4,7 @@ import {Type} from '../_models/type.enum';
 import {Subscription, timer} from 'rxjs';
 import {RoomIconStatus} from '../_models/roomiconstatus';
 import {Router} from '@angular/router';
+import {Role} from '../../security/_models/role.enum';
 
 @Component({
   selector: 'app-room',
@@ -48,6 +49,7 @@ export class RoomComponent implements OnInit, OnChanges {
     //   'height': inFloorMode ? room['hoogte'] + 'px' : '',
     //   'width': inFloorMode ? room['breedte'] + 'px' : ''
   }
+
 
   ngOnChanges() {
     console.log('roomcomponent floormode:' + this.inFloorMode);

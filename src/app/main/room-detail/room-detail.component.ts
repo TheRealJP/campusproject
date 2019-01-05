@@ -46,7 +46,7 @@ export class RoomDetailComponent implements OnInit {
     );
   }
 
-  get f() {
+  get form() {
     return this.updateRoomForm.controls;
   }
 

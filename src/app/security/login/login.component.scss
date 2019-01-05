@@ -1,12 +1,14 @@
-
-
-form,h2{
-  display: flex;
-  flex-direction: column;
-  flex-wrap: nowrap;
-  align-items: center;
-  .form-group{
-    margin-top: 15px ;
-  }
+#loginContainer{
+  margin-top: 10rem;
 }
 
+.form-container, h2 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+
+.form-container > * {
+  width: 50%;
+}

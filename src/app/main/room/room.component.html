@@ -9,20 +9,22 @@
 
     <!--default info-->
     <span class="roomInfo" *ngIf="iconStatus['naam']">{{room['name']}}</span>
-    <span class="roomInfo" *ngIf="iconStatus['type']"><mat-icon>{{room['type']}}</mat-icon></span>
+    <span class="roomInfo" *ngIf="iconStatus['type']">
+      <mat-icon>{{room['type']}}</mat-icon></span>
     <!--non default-->
     <span class="roomInfo" *ngIf="room['beamer'] && iconStatus['beamer']"><mat-icon>camera</mat-icon></span>
-    <span class="roomInfo" *ngIf="room['capaciteit'] && iconStatus['capaciteit']"><mat-icon>person</mat-icon></span>
+    <span class="roomInfo" *ngIf="room['capaciteit'] && iconStatus['capaciteit']">
+      <mat-icon>person</mat-icon>100</span>
     <!--edit-->
     <span style="float: right;">
-    <button (click)="showDetail()" mat-icon-button>
-      <mat-icon>edit</mat-icon>
-    </button>
+      <button (click)="showDetail()" mat-icon-button>
+        <mat-icon>edit</mat-icon>
+      </button>
 
-    <button (click)="selectRoom()" mat-icon-button>
-      <mat-icon>keyboard_arrow_down</mat-icon>
-    </button>
-  </span>
+      <button (click)="selectRoom()" mat-icon-button>
+        <mat-icon>keyboard_arrow_down</mat-icon>
+      </button>
+    </span>
 
     <!--extraUI-->
     <div id="extraUI" *ngIf="isThisRoomSelected">
@@ -55,7 +57,6 @@
     </span>
     </div>
 
-    <div *ngIf="isThisRoomSelected">this room has been selected</div>
   </div>
 </div>
 

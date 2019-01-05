@@ -1,18 +1,27 @@
 <!--navbar-->
 <mat-toolbar color="primary">
   <mat-toolbar-row>
+
     <!--home button-->
-    <button mat-button routerLink="/home">{{title}}</button>
+    <button mat-button routerLink="/home">{{title}}
+      <span *ngIf="currentUser">({{currentUser.username}})</span>
+    </button>
 
-    <!--floor.key fetches key from [object]-->
-    <button mat-button *ngFor="let floor of floors | keyvalue"
-            routerLink="/floor/{{floor.key}}"
-            (click)="switchFloors(floor)">Verdieping {{floor.key}}</button>
+    <div *ngIf="currentUser">
+      <!--floor.key fetches key from [object]-->
+      <button mat-button *ngFor="let floor of floors | keyvalue"
+              routerLink="/floor/{{floor.key}}"
+              (click)="switchFloors(floor)">Verdieping {{floor.key}}</button>
+    </div>
+
+    <!--fills space between main and security buttons-->
+    <span class="fill-space"></span>
+
+    <div class="securityButtons">
+      <button mat-button *ngIf="!currentUser" routerLink="/login">Login</button>
+      <button mat-button *ngIf="currentUser" (click)="logout()">Logout </button>
+    </div>
   </mat-toolbar-row>
-
-  <nav *ngIf="!currentUser">
-    <a routerLink="/login">Login</a>
-  </nav>
 </mat-toolbar>
 
 <!--content-->
