@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, HostListener} from '@angular/core';
 import {User} from './security/_models/user';
 import {Router} from '@angular/router';
 import {AuthenticationService} from './security/_services/authentication.service';
@@ -16,6 +16,7 @@ export class AppComponent {
   title = 'Campus';
   currentUser: User;
   floors: Floor[] = [];
+  desktop = true;
 
   constructor(private router: Router,
               private authService: AuthenticationService,
@@ -28,6 +29,11 @@ export class AppComponent {
     }, error => console.log(error));
 
     floorService.fetchFloors().subscribe((f) => this.floors = f);
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+    this.desktop = event.target.innerWidth >= 600;
   }
 
   get isPersoneel() {

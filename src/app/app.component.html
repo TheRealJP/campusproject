@@ -1,7 +1,6 @@
 <!--navbar-->
 <mat-toolbar color="primary">
-  <mat-toolbar-row>
-
+  <mat-toolbar-row *ngIf="desktop">
     <!--home button-->
     <button mat-button routerLink="/home">{{title}}
       <span *ngIf="currentUser">({{currentUser.username}})</span>
@@ -19,8 +18,34 @@
 
     <div class="securityButtons">
       <button mat-button *ngIf="!currentUser" routerLink="/login">Login</button>
-      <button mat-button *ngIf="currentUser" (click)="logout()">Logout </button>
+      <button mat-button *ngIf="currentUser" (click)="logout()">Logout</button>
     </div>
+  </mat-toolbar-row>
+
+  <!--mobile-->
+  <mat-toolbar-row *ngIf="!desktop">
+    <button mat-icon-button [matMenuTriggerFor]="menu">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+
+    <mat-menu #menu="matMenu">
+      <!--home button-->
+      <button mat-button routerLink="/home">{{title}}
+        <span *ngIf="currentUser">({{currentUser.username}})</span>
+      </button>
+
+      <!--floors-->
+      <button mat-menu-item *ngFor="let floor of floors | keyvalue"
+              routerLink="/floor/{{floor.key}}"
+              (click)="switchFloors(floor)">Verdieping {{floor.key}}</button>
+
+      <!--security-->
+      <div class="securityButtons">
+        <button mat-button *ngIf="!currentUser" routerLink="/login">Login</button>
+        <button mat-button *ngIf="currentUser" (click)="logout()">Logout</button>
+      </div>
+    </mat-menu>
+
   </mat-toolbar-row>
 </mat-toolbar>
 
@@ -28,3 +53,7 @@
 <div id="application">
   <router-outlet></router-outlet>
 </div>
+
+
+
+

@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, HostListener, OnInit} from '@angular/core';
 import {Floor} from '../_models/floor';
 import {FloorService} from '../_services/floor.service';
 import {ActivatedRoute, ParamMap} from '@angular/router';
@@ -22,12 +22,19 @@ export class FloorcontainerComponent implements OnInit {
   };
   floorLevel: number;
   rooms: Room[];
-  inFloorMode : Boolean;
+  inFloorMode: Boolean;
   roomIconsStatus: RoomIconStatus;
+  desktop = true;
+
 
   constructor(private floorService: FloorService,
               private route: ActivatedRoute) {
 
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+    this.desktop = event.target.innerWidth >= 600;
   }
 
   ngOnInit(): void {
@@ -38,21 +45,13 @@ export class FloorcontainerComponent implements OnInit {
           this.floorLevel = floor[0].floorlevel;
           this.rooms = floor[0].rooms;
           this.floor = floor[0];
-          console.log(this.floorLevel);
+          console.log('we are at floor ' + this.floorLevel);
         }, error => this.error = error
       );
   }
 
   onListFloorSwitch(value: any) {
     this.inFloorMode = value;
-
-    // if (value === 'false') {
-    //   console.log('switched to list mode');
-    // } else {
-    //   console.log('switched to floor mode');
-    // }
-    // console.log('value' + this.inFloorMode);
-
   }
 
   toggleIconProperty(propertyName: string) {

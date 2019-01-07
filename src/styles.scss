@@ -9,11 +9,25 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
   background: rgba(255, 249, 198, 0.2);
 }
-
 app-root {
+  font-family: recorda, Helvetica,sans-serif;
   display: grid;
-  grid-template-columns: 1fr 3fr 1fr;
-  grid-template-rows: 80px minmax(650px, 1fr) auto;
-  grid-template-areas: "top top top" "middleLeft middle middleRight" "bottom bottom bottom";
+  grid-gap: 1rem;
+  grid-template-columns: 100%;
+  grid-template-rows: 80px 80px auto 20px;
+  grid-template-areas: "top top top" "middle middle middle" "bottom bottom bottom";
 }
+
+
+@media (min-width: 600px) {
+
+  app-root {
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr;
+    grid-template-rows: 80px minmax(650px, 1fr) auto;
+    grid-template-areas: "top top top" "middleLeft middle middleRight" "bottom bottom bottom";
+  }
+
+}
+
 

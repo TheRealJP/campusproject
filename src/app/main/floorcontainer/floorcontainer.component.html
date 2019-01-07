@@ -1,9 +1,8 @@
 <mat-card id="floorControls">
   <mat-card-content>
     <!--switch from floor to list-->
-    <mat-button-toggle-group id="listSwitch" #group="matButtonToggleGroup"
+    <mat-button-toggle-group *ngIf="desktop" id="listSwitch" #group="matButtonToggleGroup"
                              [value]="'false'"
-
                              (change)="onListFloorSwitch(group.value)">
       <mat-button-toggle value=false>
         <mat-icon>list</mat-icon>

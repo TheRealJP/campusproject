@@ -4,7 +4,6 @@ import {Type} from '../_models/type.enum';
 import {Subscription, timer} from 'rxjs';
 import {RoomIconStatus} from '../_models/roomiconstatus';
 import {Router} from '@angular/router';
-import {Role} from '../../security/_models/role.enum';
 
 @Component({
   selector: 'app-room',
@@ -42,17 +41,9 @@ export class RoomComponent implements OnInit, OnChanges {
       'height': this.inFloorMode ? this.room['hoogte'] + 'px' : '',
       'width': this.inFloorMode ? this.room['breedte'] + 'px' : ''
     };
-
-    // 'backgroundColor': roomColor,
-    //   'top': inFloorMode ? room['y'] + 'px' : 0 + 'px',
-    //   'left': inFloorMode ? room['x'] + 'px' : 0 + 'px',
-    //   'height': inFloorMode ? room['hoogte'] + 'px' : '',
-    //   'width': inFloorMode ? room['breedte'] + 'px' : ''
   }
 
-
   ngOnChanges() {
-    console.log('roomcomponent floormode:' + this.inFloorMode);
     this.currentStyles = {
       'backgroundColor': this.roomColor,
       'top': this.inFloorMode ? this.room['y'] + 'px' : 0 + 'px',
@@ -60,18 +51,14 @@ export class RoomComponent implements OnInit, OnChanges {
       'height': this.inFloorMode ? this.room['hoogte'] + 'px' : '',
       'width': this.inFloorMode ? this.room['breedte'] + 'px' : ''
     };
-    console.log(this.currentStyles);
   }
 
-  //  todo:deselect room when selecting another
   selectRoom() {
-
     if (this.room['naam'] !== this.selectedRoom) {
       this.isThisRoomSelected = false;
     }
 
     this.unselectSubscription = timer(0, 1000).subscribe(t => {
-      console.log(t);
       if (t >= 10) {
         this.isThisRoomSelected = false;
         this.unselectSubscription.unsubscribe();
