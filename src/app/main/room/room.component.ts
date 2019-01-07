@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Room} from '../_models/room';
 import {Type} from '../_models/type.enum';
 import {Subscription, timer} from 'rxjs';
@@ -12,7 +12,7 @@ import {Router} from '@angular/router';
 })
 
 // todo:location adhv breedte & hoogte
-export class RoomComponent implements OnInit, OnChanges {
+export class RoomComponent implements OnInit {
   @Input() room: Room;
   @Input() selectedRoom: string;
   @Input() iconStatus: RoomIconStatus;
@@ -26,6 +26,7 @@ export class RoomComponent implements OnInit, OnChanges {
   private currentStyles: {
     backgroundColor: string; top: string; left: string; width: string; height: string
   };
+  private nextBooking: string;
 
   constructor(private router: Router) {
   }
@@ -34,16 +35,6 @@ export class RoomComponent implements OnInit, OnChanges {
   ngOnInit() {
     this.initRoomColor();
     this.amountOfHoursBooked = 1;
-    this.currentStyles = {
-      'backgroundColor': this.roomColor,
-      'top': this.inFloorMode ? this.room['y'] + 'px' : 0 + 'px',
-      'left': this.inFloorMode ? this.room['x'] + 'px' : 0 + 'px',
-      'height': this.inFloorMode ? this.room['hoogte'] + 'px' : '',
-      'width': this.inFloorMode ? this.room['breedte'] + 'px' : ''
-    };
-  }
-
-  ngOnChanges() {
     this.currentStyles = {
       'backgroundColor': this.roomColor,
       'top': this.inFloorMode ? this.room['y'] + 'px' : 0 + 'px',
@@ -123,11 +114,12 @@ export class RoomComponent implements OnInit, OnChanges {
   // change periodOrScheduler to make it go faster, default should be 1000 == 1s
   private bookingTimer() {
     const maxHours = this.amountOfHoursBooked * 3600;
-
     console.log('maxhours:' + maxHours);
+
     let timeObject = new Date();
-    timeObject = new Date(timeObject.getTime() + maxHours * 10);
+    timeObject = new Date(timeObject.getTime() + maxHours * 1000);
     console.log('next reservation can be made in:' + timeObject);
+    this.nextBooking = timeObject.getHours() + ':' + timeObject.getMinutes() + ':' + timeObject.getSeconds();
 
     this.reservationSubscription = timer(0, 1000).subscribe(t => {
       this.getColor(t, maxHours);

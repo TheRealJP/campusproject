@@ -15,6 +15,9 @@
     <span class="roomInfo" *ngIf="room['beamer'] && iconStatus['beamer']"><mat-icon>camera</mat-icon></span>
     <span class="roomInfo" *ngIf="room['capaciteit'] && iconStatus['capaciteit']">
       <mat-icon>person</mat-icon>100</span>
+    <span id="space"></span>
+    <span *ngIf="room['bezet'] && nextBooking">Vrij om: {{nextBooking}}</span>
+
     <!--edit-->
     <span style="float: right;">
       <button (click)="showDetail()" mat-icon-button>
